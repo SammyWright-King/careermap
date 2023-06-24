@@ -13,6 +13,9 @@
 
                 <div class="card-body" id="content"></div>
 
+                <div class="card-footer" id="job-date">
+                   
+                </div>
             </div>
         </div>
     </div>
@@ -39,7 +42,7 @@
             success : (response)=>{
                 var job = response.job;
                 
-                addToHtml(job.title, job.description)
+                addToHtml(job.title, job.description, job.updated_at)
                 
             },
             error: function(response) {
@@ -53,9 +56,11 @@
     /**
      * function to append title and description to page
      */
-    function addToHtml(title, description)
+    function addToHtml(title, description, date)
     {
+        date = new Date(date).toLocaleString('uk', { timeZone: 'UTC' })
         $("#content").append(`<h4 class='card-title fw-bold'>${title}</h4>`);
         $("#content").append(`<p class='card-text'>${description}</>`);
+        $("#job-date").append(`${date}`);
     }
 </script>
